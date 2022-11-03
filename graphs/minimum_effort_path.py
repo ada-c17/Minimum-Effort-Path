@@ -26,11 +26,11 @@ def min_effort_path(heights):
     rows = len(heights)
     columns = len(heights[0])
 
-    queue = [[0, 0, 0]]
+    queue = [(0, 0, 0)]
     # diff in height between prev node and new node,
     # x of new node, y of new node
     visited = set()
-    directions_to_check = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+    directions_to_check = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
     # update this as you travese the path with the current lowest difference; max height on minimum effort path
     min_effort = float("-inf")
