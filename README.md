@@ -1,5 +1,5 @@
 # Minimum Effort Path
-An exercise working with Graphs.
+An exercise working with Graphs
 
 ## Exercise
 Given a 2D array of size rows x columns, where heights[row][column] represents the height of cell (row, column). 
