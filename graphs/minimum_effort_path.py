@@ -41,7 +41,10 @@ def min_effort_path(heights):
 
         # Pop the min_effort cell off the queue
         current_effort, current_cell = heapq.heappop(pq)
-
+        
+        if visited[current_cell]:
+            continue
+        
         # if cell = dest, it means we reached the final cell and popped off the path to get there that had the smallest max effort
         if current_cell == dest:
             return current_effort
@@ -74,3 +77,6 @@ def min_effort_path(heights):
                 new_effort = abs(new_height - old_height)
                 effort_to_append = max(new_effort, current_effort)
                 heapq.heappush(pq, (effort_to_append, cell))
+
+heights = [[1,2,1,1,1,1],[1,2,1,2,1,2],[1,2,1,2,1,3],[1,2,1,2,1,3],[1,1,1,2,1,2]]
+min_effort_path(heights)
