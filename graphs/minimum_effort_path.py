@@ -77,6 +77,3 @@ def min_effort_path(heights):
                 new_effort = abs(new_height - old_height)
                 effort_to_append = max(new_effort, current_effort)
                 heapq.heappush(pq, (effort_to_append, cell))
-
-heights = [[1,2,1,1,1,1],[1,2,1,2,1,2],[1,2,1,2,1,3],[1,2,1,2,1,3],[1,1,1,2,1,2]]
-min_effort_path(heights)
