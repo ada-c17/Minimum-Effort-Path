@@ -1,5 +1,4 @@
 import heapq
-
 # Notes/references:
 # Used https://replit.com/@adadev/graphs-p2-practice-1#dijkstra/cheapest_flight.py
 
@@ -34,14 +33,14 @@ def min_effort_path(heights):
     # Initialize a priority queue
     pq = []
 
-    # Queue tuple: 1st item max effort so far, 2nd item is height, 3rd item is cell coordinates
+    # Queue tuple: 1st item max effort so far, 2nd item is cell coordinates
     # Add the first element to the queue 
-    heapq.heappush(pq, (0, heights[0][0], (0,0)))
+    heapq.heappush(pq, (0, (0,0)))
 
     while pq:
 
         # Pop the min_effort cell off the queue
-        current_effort, height, current_cell = heapq.heappop(pq)
+        current_effort, current_cell = heapq.heappop(pq)
 
         # if cell = dest, it means we reached the final cell and popped off the path to get there that had the smallest max effort
         if current_cell == dest:
@@ -71,7 +70,7 @@ def min_effort_path(heights):
         for cell in neighbors:
             if not visited[cell]:
                 new_height = heights[cell[0]][cell[1]]
-                new_effort = abs(new_height - height)
-                effort_to_append = new_effort if new_effort > current_effort else current_effort
-                heapq.heappush(pq, (effort_to_append, new_height, cell))
-
+                old_height = heights[current_cell[0]][current_cell[1]]
+                new_effort = abs(new_height - old_height)
+                effort_to_append = max(new_effort, current_effort)
+                heapq.heappush(pq, (effort_to_append, cell))
