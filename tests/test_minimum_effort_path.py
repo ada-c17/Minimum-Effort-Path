@@ -34,7 +34,7 @@ def test_will_return_min_effort_for_third_example():
 
 def test_will_return_zero_for_empty_graph():
     # Arrange
-    heights = None
+    heights = []
 
     # Act
     answer = min_effort_path(heights)
