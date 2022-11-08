@@ -30,7 +30,7 @@ def min_effort_path(heights):
         visited = set()
 
         # cost = {():int}
-        min_efforts = [[columns * rows] * rows for _ in range(rows)]
+        min_efforts = [[float('inf')] * columns for _ in range(rows)]
         min_efforts[0][0] = 0
         
         pq = [(0,0,0)] # minimum effort, row, and column of current cell
@@ -44,7 +44,7 @@ def min_effort_path(heights):
             for d in directions:
                 new_i = i + d[0]
                 new_j = j + d[1]
-                if 0 <= new_i < rows and 0 <= new_j < rows and (new_i, new_j) not in visited:
+                if 0 <= new_i < rows and 0 <= new_j < columns and (new_i, new_j) not in visited:
                     max_effort = max(abs(heights[i][j]-heights[new_i][new_j]), minimum)
 
                     if max_effort <  min_efforts[new_i][new_j]:
