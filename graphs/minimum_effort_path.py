@@ -15,4 +15,4 @@ def min_effort_path(heights):
         int
             minimum effort required to navigate the path from (0, 0) to heights[rows - 1][columns - 1]
     """
-    pass
+    print('This is a test')
