@@ -1,3 +1,5 @@
+import heapq
+
 def min_effort_path(heights):
     """ Given a 2D array of heights, write a function to return
         the path with minimum effort.
@@ -23,32 +25,34 @@ def min_effort_path(heights):
     # need length of all elements in one of the arrays
     # start (0,0) top left
     # end heights[-1][-1] bottom right - base case
+    if heights:
+        rows, columns = len(heights), len(heights[0])
+        visited = set()
 
-    rows, columns = len(heights), len(heights[-1])
-    visited = set()
+        # cost = {():int}
+        min_efforts = [[columns * rows] * rows for _ in range(rows)]
+        min_efforts[0][0] = 0
+        
+        pq = [(0,0,0)] # minimum effort, row, and column of current cell
 
-    # cost = {():int}
-    min_efforts = [[sys.maximum] * rows for _ in range(rows)]
-    min_efforts[0][0] = 0
-    
-    pq = [(0,0,0)] # minimum effort, row, and column of current cell
+        directions = [(-1,0), (1,0), (0,-1), (0,1)]
 
-    directions = [(-1,0), (1,0), (0,-1), (0,1)]
+        while pq: 
+            minimum, i, j = heapq.heappop(pq)
+            visited.add((i,j))
 
-    while pq: 
-        minimum, i, j = heapq.heappop(pq)
-        visited.add((i,j))
+            for d in directions:
+                new_i = i + d[0]
+                new_j = j + d[1]
+                if 0 <= new_i < rows and 0 <= new_j < rows and (new_i, new_j) not in visited:
+                    max_effort = max(abs(heights[i][j]-heights[new_i][new_j]), minimum)
 
-        for d in directions:
-            new_i = i + d[0]
-            new_j = j + d[1]
-            if 0 <= new_i < rows and 0 <= new_j < j and (new_i, new_j) not in seen:
-                max_effort = max(abs(heights[i][j]-heights[new_i][new_j]), minimum)
-
-                if max_effort <  minimum[new_i][new_j]:
-                    heapq.heappush(pq, (max_effort, new_i, new_j))
-                    min_efforts[new_i][new_j] = max_effort
-    return min_efforts[-1][-1]
+                    if max_effort <  min_efforts[new_i][new_j]:
+                        heapq.heappush(pq, (max_effort, new_i, new_j))
+                        min_efforts[new_i][new_j] = max_effort
+        return min_efforts[-1][-1]
+    else:
+        return 0
 
 
     # for node in heights:
