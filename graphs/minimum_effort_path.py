@@ -1,3 +1,6 @@
+import heapq
+import math
+
 def min_effort_path(heights):
     """ Given a 2D array of heights, write a function to return
         the path with minimum effort.
