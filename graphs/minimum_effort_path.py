@@ -1,4 +1,3 @@
-from collections import deque
 import heapq
 
 def min_effort_path(heights):
@@ -21,30 +20,6 @@ def min_effort_path(heights):
 
     if not heights:
         return 0
-    
-    # rows = len(heights)
-    # columns = len(heights[0])
-    # queue = []
-    # heapq.heappush(queue, (0, 0, 0))
-    # visited = set()
-    # max_diff = 0
-    
-    # while queue:
-    #     cost, row, col = heapq.heappop(queue)
-    #     if (row, col) in visited:
-    #         continue
-    #     visited.add((row, col))
-    #     if row == rows - 1 and col == columns - 1:
-    #         return max_diff
-        
-    #     for r, c in [(row - 1, col), (row + 1, col), (row, col - 1), (row, col + 1)]:
-    #         if r >= 0 and r < rows and c >= 0 and c < columns:
-    #             new_diff = max(max_diff, abs(heights[row][col] - heights[r][c]))
-    #             new_cost = cost + new_diff
-    #             if (r, c) not in visited or new_cost < cost:
-    #                 heapq.heappush(queue, (new_cost, r, c))
-                
-    # return max_diff
 
     rows = len(heights)
     columns = len(heights[0])
