@@ -40,17 +40,4 @@ def min_effort_path(heights):
                 heapq.heappush(minHeap, (new_effort, row, col))
             
     return effort
-        # if r == rows - 1 and c == cols - 1:
-        #     return result
-        
-        # visited.add((r, c))
-
-        # for row, col in [(r + 1, c), (r - 1, c)], (r, c - 1), (r, c + 1)]:
-        #     if row >= 0 and row <rows and col >= 0 and col < cols and (row,col) not in visited:
-        #         newDifference = abs(heights[r][c] - heights[row][col])
-        #         heapq.heappush(minHeap, (newDifference, row,))
-
-            
-
-
-    # directions = [(1,0), (-1, 0), (0,1), (0,-1)]
+    
