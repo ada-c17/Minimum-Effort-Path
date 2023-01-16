@@ -1,18 +1,34 @@
+import heapq
+
 def min_effort_path(heights):
-    """ Given a 2D array of heights, write a function to return
-        the path with minimum effort.
+    if  not heights:
+        return 0
+        
+    r,c = len(heights), len(heights[0])
+    queue = [(0,0,0)]
 
-        A route's effort is the maximum absolute difference in heights 
-        between two consecutive cells of the route.
+    while queue:
+        curr = heapq.heappop(queue)
+        c_eff =curr[0]
+        x = curr[1]
+        y = curr[2]
 
-        Parameters
-        ----------
-        heights : list[list[]] (2D array)
-            2D array containing the heights of the available paths
+        if x == r-1 and y == c-1:
+            return c_eff
+        
+        if heights[x][y] == '':
+            continue
 
-        Returns
-        -------
-        int
-            minimum effort required to navigate the path from (0, 0) to heights[rows - 1][columns - 1]
-    """
-    pass
+        for dx, dy in [[1,0], [-1,0], [0,1], [0, -1]]:
+            newx = x + dx
+            newy = y + dy
+
+            if 0 <= newx < r and 0 <= newy < c and heights[newx][newy] != '':
+                eff = max(c_eff, abs(heights[newx][newy] - heights[x][y]))
+                heapq.heappush(queue, (eff, newx, newy))
+        
+        heights[x][y] = ''
+
+    matrix = [[2,3,4], [4,9,5], [6,4,6]]
+    return matrix
+
