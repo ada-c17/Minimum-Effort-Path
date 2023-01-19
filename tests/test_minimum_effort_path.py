@@ -1,4 +1,3 @@
-import pytest
 from graphs.minimum_effort_path import *
 
 
