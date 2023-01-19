@@ -27,7 +27,7 @@ def min_effort_path(heights):
    #create a list to store the shortest paths
     distances = {}
     #create a set to store nodes already visited
-    visited = []
+    visited = set()
 
     #create an empty priority queue
     pq = []
@@ -52,23 +52,25 @@ def min_effort_path(heights):
         cost_to_travel, coordinate = heappop(pq)
         cur_x, cur_y = coordinate
         #add current to visited
-        visited.append(coordinate)
+        visited.add(coordinate)
+        print(coordinate)
         #loop through current's neighbors
         #note since g is an adjacency matrix, we are actually looping through all nodes here
         # we will find the actual neighbors inside the for loop
         neighbors = []
-        if is_valid_index(heights, cur_y - 1):
+        if is_valid_index(heights[0], cur_y - 1):
             up = (cur_x, cur_y -1)
             neighbors.append(up)
-        if is_valid_index(heights, cur_y + 1):
+        if is_valid_index(heights[0], cur_y + 1):
             down = (cur_x,cur_y +1)
             neighbors.append(down)
-        if is_valid_index(heights[0], cur_x - 1):
+        if is_valid_index(heights, cur_x - 1):
             left = (cur_x -1,cur_y)
             neighbors.append(left)
-        if is_valid_index(heights[0], cur_x + 1):
+        if is_valid_index(heights, cur_x + 1):
             right = (cur_x +1,cur_y)
             neighbors.append(right)
+        print(neighbors)
         for neighbor_coord in neighbors:
             neighbor_x, neighbor_y = neighbor_coord
 
@@ -76,7 +78,7 @@ def min_effort_path(heights):
             edge_weight = abs(heights[cur_x][cur_y] - heights[neighbor_x][neighbor_y]) 
             #if there is actually an edge between current & neighbor
             #and the neighbor has not yet been visited
-            if edge_weight > 0 and neighbor_coord not in visited:
+            if edge_weight >= 0 and neighbor_coord not in visited:
                 #calculate the cost of path from start node -> neighbor via current node
                 if distances[coordinate] != float('inf'):
                     temp_distance = max(distances[coordinate], edge_weight)
@@ -87,7 +89,7 @@ def min_effort_path(heights):
                     #set new minimum distance to temp_distance
                     distances[neighbor_coord] = temp_distance
                     #add neighbor to priority queue setting its distance as its priority
-                    heappush(pq, (temp_distance, neighbor_coord))
+                heappush(pq, (distances[neighbor_coord], neighbor_coord))
     final_cell = (len(heights) -1, len(heights[0])-1)
     print(distances[final_cell])
     print(distances)
