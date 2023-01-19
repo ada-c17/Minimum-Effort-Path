@@ -33,7 +33,7 @@ def min_effort_path(heights):
     while pq != []:
 
         effort, row, col = heapq.heappop(pq)
-        seen.add((n_rows, n_cols))
+        seen.add((row, col))
         min_effort = max(min_effort, effort)
 
         final= row == n_rows-1 and col == n_cols-1
