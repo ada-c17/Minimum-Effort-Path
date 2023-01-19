@@ -27,7 +27,7 @@ def min_effort_path(heights):
    #create a list to store the shortest paths
     distances = {}
     #create a set to store nodes already visited
-    visited = set()
+    visited = []
 
     #create an empty priority queue
     pq = []
@@ -52,21 +52,21 @@ def min_effort_path(heights):
         cost_to_travel, coordinate = heappop(pq)
         cur_x, cur_y = coordinate
         #add current to visited
-        visited.add(coordinate)
+        visited.append(coordinate)
         #loop through current's neighbors
         #note since g is an adjacency matrix, we are actually looping through all nodes here
         # we will find the actual neighbors inside the for loop
         neighbors = []
-        if is_valid_index(heights[0], cur_y - 1):
+        if is_valid_index(heights, cur_y - 1):
             up = (cur_x, cur_y -1)
             neighbors.append(up)
-        if is_valid_index(heights[0], cur_y + 1):
+        if is_valid_index(heights, cur_y + 1):
             down = (cur_x,cur_y +1)
             neighbors.append(down)
-        if is_valid_index(heights, cur_x - 1):
+        if is_valid_index(heights[0], cur_x - 1):
             left = (cur_x -1,cur_y)
             neighbors.append(left)
-        if is_valid_index(heights, cur_x + 1):
+        if is_valid_index(heights[0], cur_x + 1):
             right = (cur_x +1,cur_y)
             neighbors.append(right)
         for neighbor_coord in neighbors:
@@ -88,10 +88,12 @@ def min_effort_path(heights):
                     distances[neighbor_coord] = temp_distance
                     #add neighbor to priority queue setting its distance as its priority
                     heappush(pq, (temp_distance, neighbor_coord))
-    final_cell = (len(heights) -1, len(heights)-1)
+    final_cell = (len(heights) -1, len(heights[0])-1)
     print(distances[final_cell])
+    print(distances)
+    print(visited)
     maximum = 0
     for coordinate, distance in distances.items():
         if distance > maximum:
             maximum = distance
-    return maximum
+    return distances[final_cell]
