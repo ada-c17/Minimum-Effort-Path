@@ -37,6 +37,3 @@ def min_effort_path(heights):
             if 0<=next_row<rows and 0<=next_col<cols and not vis[next_row][next_col]:
                 heapq.heappush(q, (max(cur[0], abs(heights[next_row][next_col]-heights[cur[1]][cur[2]])), next_row, next_col))
     return -1
-
-heights = [[1,2,2],[3,8,2],[5,3,5]]
-print(min_effort_path(heights))
